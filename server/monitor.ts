@@ -141,21 +141,21 @@ export const Monitor = new class {
 	 * Counts a connection. Returns true if the connection should be terminated for abuse.
 	 */
 	countConnection(ip: string, name = '') {
-		const [count, duration] = this.connections.increment(ip, 30 * 60 * 1000);
-		if (count === 500) {
-			this.adminlog(`[ResourceMonitor] IP ${ip} banned for cflooding (${count} times in ${Chat.toDurationString(duration)}${name ? ': ' + name : ''})`);
-			return true;
-		}
-
-		if (count > 500) {
-			if (count % 500 === 0) {
-				const c = count / 500;
-				if (c === 2 || c === 4 || c === 10 || c === 20 || c % 40 === 0) {
-					this.adminlog(`[ResourceMonitor] IP ${ip} still cflooding (${count} times in ${Chat.toDurationString(duration)}${name ? ': ' + name : ''})`);
-				}
-			}
-			return true;
-		}
+		// const [count, duration] = this.connections.increment(ip, 30 * 60 * 1000);
+		// if (count === 500) {
+		// 	this.adminlog(`[ResourceMonitor] IP ${ip} banned for cflooding (${count} times in ${Chat.toDurationString(duration)}${name ? ': ' + name : ''})`);
+		// 	return true;
+		// }
+    //
+		// if (count > 500) {
+		// 	if (count % 500 === 0) {
+		// 		const c = count / 500;
+		// 		if (c === 2 || c === 4 || c === 10 || c === 20 || c % 40 === 0) {
+		// 			this.adminlog(`[ResourceMonitor] IP ${ip} still cflooding (${count} times in ${Chat.toDurationString(duration)}${name ? ': ' + name : ''})`);
+		// 		}
+		// 	}
+		// 	return true;
+		// }
 
 		return false;
 	}
@@ -165,16 +165,16 @@ export const Monitor = new class {
 	 * terminated for abuse.
 	 */
 	countBattle(ip: string, name = '') {
-		const [count, duration] = this.battles.increment(ip, 30 * 60 * 1000);
-		if (duration < 5 * 60 * 1000 && count % 30 === 0) {
-			this.adminlog(`[ResourceMonitor] IP ${ip} has battled ${count} times in the last ${Chat.toDurationString(duration)}${name ? ': ' + name : ''})`);
-			return true;
-		}
-
-		if (count % 150 === 0) {
-			this.adminlog(`[ResourceMonitor] IP ${ip} has battled ${count} times in the last ${Chat.toDurationString(duration)}${name ? ': ' + name : ''}`);
-			return true;
-		}
+		// const [count, duration] = this.battles.increment(ip, 30 * 60 * 1000);
+		// if (duration < 5 * 60 * 1000 && count % 30 === 0) {
+		// 	this.adminlog(`[ResourceMonitor] IP ${ip} has battled ${count} times in the last ${Chat.toDurationString(duration)}${name ? ': ' + name : ''})`);
+		// 	return true;
+		// }
+    //
+		// if (count % 150 === 0) {
+		// 	this.adminlog(`[ResourceMonitor] IP ${ip} has battled ${count} times in the last ${Chat.toDurationString(duration)}${name ? ': ' + name : ''}`);
+		// 	return true;
+		// }
 
 		return false;
 	}
